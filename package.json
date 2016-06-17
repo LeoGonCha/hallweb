@@ -14,10 +14,11 @@
     "nedb": "^1.8.0"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "",
+  
+  "scripts": {
+	"start": "node server.js"
+  },
+  "main": "server.js"
 }
 
-"scripts": {
-  "start": "node server.js"
-},
-"main": "server.js"
