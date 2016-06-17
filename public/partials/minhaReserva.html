@@ -1,0 +1,25 @@
+<div class="page-header text-center">
+    <h1>Minhas Reservas</h1>
+</div>
+
+
+<div class="jumbotron">
+	<p>Suas reservas</p>
+
+
+	<div id="divreservas">
+  		<ul class="list-group">
+  			<li class="list-group-item" ng-repeat="reserva in reservas">
+	    			<h3>
+	    			<span class="label label-default">Reserva {{reserva.codigo}}</span>
+	    			<span class="label label-info">{{reserva.data}} - {{reserva.local}} - {{reserva.hora}}</span>
+	    			<button type="button" class="btn btn-primary btn-lg" ng-disabled="!reserva.ativa">Alterar</button>
+	    			<button type="button" class="btn btn-danger btn-lg" ng-disabled="!reserva.ativa"ng-click="cancelar(reserva)">Cancelar</button>
+	    			<button type="button" class="btn btn-warning btn-lg" ng-disabled="!reserva.ativa">Informar Incidente</button>
+	    			</h3>
+	    		</button>
+  			</li>
+		</ul>
+	</div>
+  
+</div>  

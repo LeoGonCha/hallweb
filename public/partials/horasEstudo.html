@@ -1,0 +1,24 @@
+<div class="page-header text-center">
+    <h1>Horas de Estudo</h1>
+</div>
+
+
+<div class="jumbotron">
+	<p>Compre um pacote com horas de estudo para utilizar em um de nossos espaços</p>
+
+
+	<div id="divpacotes">
+  		<ul class="list-group">
+  			<li class="list-group-item" ng-repeat="pacote in pacotes">
+	    			<h3>
+	    			<span class="label label-default">{{pacote.nome}}</span>
+	    			<span class="label label-info">{{pacote.qtd}} horas</span>
+	    			<span class="label label-success">R$ {{pacote.valor}}</span>
+	    			<button type="button" class="btn btn-primary btn-lg" ng-click="selecionaPacote(pacote)">Comprar</button>
+	    			</h3>
+	    		</button>
+  			</li>
+		</ul>
+	</div>
+  
+</div>  

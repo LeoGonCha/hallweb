@@ -1,0 +1,72 @@
+<div class="page-header text-center">
+    <h1>Salas de Estudo</h1>
+</div>
+
+
+<div class="jumbotron">
+	<p>Aqui você pode pesquisar as salas que temos disponíveis em sua região. </p>
+  
+	<ol class="breadcrumb alert-info" ng-click="limpaLojasPosicoes()">
+		<li ng-repeat="nav in navLojas">{{nav.nome}}</li>
+	</ol>
+  
+
+	<div class="btn-group" ng-show="mostraCidades">
+		<button id="btnCidade" type="button" class="btn-primary btn-lg dropdown-toggle"
+  		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  			<span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+  				 Selecione uma Cidade
+  			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  		<li ng-repeat="cidade in cidades" ng-click="selecionaCidade(cidade)"><h4>{{cidade.nome}}</h4></li>
+		</ul>
+  </div>
+
+	<div class="btn-group" ng-show="mostraLojas">
+  		<button id="btnLoja" type="button" class="btn-primary btn-lg dropdown-toggle"
+    		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			<span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+    				 Selecione uma Loja
+    			<span class="caret"></span>
+  		</button>
+  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    		<li ng-repeat="loja in lojas" ng-click="selecionaLoja(loja)"><h4>{{loja.nome}}</h4></li>
+  		</ul>
+	</div>
+
+   <div class="col-lg-6" ng-show="mostraData">
+      <div id="datetimepicker" class="input-group input-group-lg"> 
+        <span class="input-group-addon add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+        </span>
+        <input id="txtdia" type="text" placeholder="Data" class="form-control"></input>
+        <span class="input-group-btn">
+        <button type="button" class="btn-primary btn-lg" id="btndia" 
+          ng-click="selecionaData()">
+               Neste Dia!
+        </button>
+        </span>
+      </div>
+    </div>
+ 
+	<div id="divposicoes" ng-show="mostraPosicoes">
+  		<ul class="list-group">
+  			<li class="list-group-item">
+	    		<button type="button" class="list-group-item" ng-repeat="posicao in posicoes" ng-click="selecionaPosicao(posicao)">{{posicao.nome}}
+	      			<span class="badge">{{posicao.qtd}}</span>
+	    		</button>
+  			</li>
+		</ul>
+	</div>
+
+  </p>
+  	<button type="button" class="btn btn-primary btn-lg" ng-show="!mostraPosicoes && !mostraData && !mostraLojas && !mostraCidades" ng-click="reservar()">
+  		<h4>Reservar</h4>
+  	</button>
+	</p>
+
+</div>
+    
+
+
