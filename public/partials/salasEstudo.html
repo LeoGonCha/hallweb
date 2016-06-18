@@ -11,6 +11,30 @@
 	</ol>
   
 
+  <div class="times">
+    <div class="time options-tbl mobile-toggler-parent ng-scope" ng-repeat="s in listaSessoes">
+      <header class="left-align mobile-toggler">
+        <h2>{{s.sessao}}</h2>
+        <table>
+          <tbody>
+            <tr  ng-repeat="hi in s.horariosI">
+              <td>
+                 {{hi.hora}}
+              </td>
+              <td>
+                  {{s.horariosM[$index].hora}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
+    </div>
+  </div>
+
+ 
+
+
+
 	<div class="btn-group" ng-show="mostraCidades">
 		<button id="btnCidade" type="button" class="btn-primary btn-lg dropdown-toggle"
   		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

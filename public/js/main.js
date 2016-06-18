@@ -8,6 +8,12 @@ angular.module('hall', ['minhasDiretivas','ngAnimate','ngRoute'])
 			controller: 'SalasController'
 		});
 
+		$routeProvider.when('/listaSessoes/:dia', {
+			templateUrl: 'partials/salasEstudo.html',
+			controller: 'SalasController'
+		});
+
+
 		$routeProvider.when('/horas', {
 			templateUrl: 'partials/horasEstudo.html',
 			controller: 'HorasController'

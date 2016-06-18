@@ -26,6 +26,117 @@ api.listaPacotes = function(req, res) {
     ]);
 };
 
+api.listaSessoesDia = function(req, res) {
+    console.log('listaSessoesDia');
+    console.log(req.params.dia);
+
+    var d = new Date(req.params.dia);
+    console.log(d.getDate());
+
+
+     res.json([
+        {  
+            sessoes: [
+                {
+                    sessao: 'manhã',
+                    horariosI: [
+                                {
+                                    hora: '08:00',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '10:00',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '12:00',
+                                    disponivel: true
+                                }
+                    ],
+                    horariosM: [
+                                {
+                                    hora: '08:30',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '10:30',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '12:30',
+                                    disponivel: false
+                                }
+                    ]
+                },
+                {
+                    sessao: 'tarde',
+                    horariosI: [
+                                {
+                                    hora: '14:00',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '16:00',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '18:00',
+                                    disponivel: true
+                                }
+                    ],
+                    horariosM: [
+                                {
+                                    hora: '14:30',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '16:30',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '18:30',
+                                    disponivel: false
+                                }
+                    ]
+                },
+                {
+                    sessao: 'noite',
+                    horariosI: [
+                        
+                                {
+                                    hora: '19:00',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '21:00',
+                                    disponivel: true
+                                },
+                                {
+                                    hora: '23:00',
+                                    disponivel: false
+                                }
+                    ],
+                    horariosM: [
+                                {
+                                    hora: '19:30',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '21:30',
+                                    disponivel: false
+                                },
+                                {
+                                    hora: '23:30',
+                                    disponivel: false
+                                }
+                           
+                    ]
+                }
+            ]
+        }
+    ]);
+}
+
 api.listaReservas = function(req, res) {
     console.log('listaReservas');
      res.json([

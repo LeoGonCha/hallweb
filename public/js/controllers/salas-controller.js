@@ -1,4 +1,4 @@
-angular.module('hall').controller('SalasController', function($scope, $http){
+angular.module('hall').controller('SalasController', function($scope, $http, $routeParams){
 
 	$scope.cidades = [];
 	$scope.cidade = [];
@@ -13,6 +13,8 @@ angular.module('hall').controller('SalasController', function($scope, $http){
 	$scope.mostraLojas = false;
 	$scope.mostraData = false;
 	$scope.mostraPosicoes = false;
+
+	$scope.listaSessoes = [];
 
 	var data = null;
 
@@ -112,6 +114,14 @@ angular.module('hall').controller('SalasController', function($scope, $http){
 			$scope.navLojas.push({nome: data.toString()});
 			$scope.mostraData = false;
 			$scope.mostraPosicoes = true;
+
+			$http.get('/listaSessoes/:dia=' + data).success(function(listaSessoes){
+				$scope.listaSessoes = listaSessoes[0].sessoes;
+				console.log(listaSessoes);
+			}).error(function(erro){
+				console.log(erro);
+			});
+			
 			
 			/* //listar horas
 			$http.get('listaCidades').success(function(cidades){
@@ -125,6 +135,7 @@ angular.module('hall').controller('SalasController', function($scope, $http){
 		
 		console.log(data);
 	};
+
 
 	//https://tarruda.github.io/bootstrap-datetimepicker/
 	//@see https://gist.github.com/eugenekgn/f00c4d764430642dca4b 
