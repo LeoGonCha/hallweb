@@ -22,6 +22,9 @@ module.exports  = function(app) {
 	app.route('/listaSessoes/:dia')
         .get(api.listaSessoesDia);
 
+	app.route('/listaTempos')
+        .get(api.listaTempos);        
+
   // habilitando HTML5MODE
   app.all('/*', function(req, res) {
       res.sendFile(path.resolve('public/index.html'));

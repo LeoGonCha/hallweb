@@ -135,7 +135,50 @@ api.listaSessoesDia = function(req, res) {
             ]
         }
     ]);
-}
+};
+
+
+api.listaTempos = function(req, res) {
+    console.log('listaTempos');
+     res.json([
+        {  
+            nome: '2 horas',
+            qtd: 2
+        },
+        {
+            nome: '3 horas',
+            qtd: 3
+        },
+        {
+            nome: '4 horas',
+            qtd: 4
+        },
+        {
+            nome: '5 horas',
+            qtd: 5
+        },
+        {
+            nome: '6 horas',
+            qtd: 6
+        },
+        {
+            nome: '7 horas',
+            qtd: 7
+        },
+        {
+            nome: '8 horas',
+            qtd: 8
+        },
+        {
+            nome: '9 horas',
+            qtd: 9
+        },
+        {
+            nome: '10 horas',
+            qtd: 10
+        }
+    ]);
+};
 
 api.listaReservas = function(req, res) {
     console.log('listaReservas');

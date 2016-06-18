@@ -6,18 +6,25 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
 	$scope.loja = [];
 	$scope.posicoes = [];
 	$scope.posicao = [];
+	$scope.tempo = [];
+	$scope.hora = [];
 
-	$scope.navLojas = [{nome: ''}];
+	$scope.navLojas = [{nome: '', comp:''}];
 
 	$scope.mostraCidades = true;
 	$scope.mostraLojas = false;
-	$scope.mostraData = false;
 	$scope.mostraPosicoes = false;
+	$scope.mostraTempo = false;
+	$scope.mostraData = false;
+	$scope.mostraSessoes = false;
 
 	$scope.listaSessoes = [];
+	$scope.tempos = [];
 
 	var data = null;
+	var dataCorrente = new Date();
 
+	
 
 	$http.get('listaCidades').success(function(cidades){
 		$scope.cidades = cidades;
@@ -26,13 +33,69 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
 		console.log(erro);
 	});
 
-	$scope.limpaLojasPosicoes = function() {
-		$scope.navLojas = [{nome: ''}];
-		$scope.mostraCidades = true;
-		$scope.mostraLojas = false;
-		$scope.mostraData = false;
-		$scope.mostraPosicoes = false;
-		
+	$scope.limpaPosicoes = function(nav) {
+		console.log(nav.comp);
+		if(nav.comp == 'cidade'){
+			$scope.navLojas = [{nome: '', comp:''}];
+			$scope.mostraCidades = true;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = false;
+			$scope.mostraData = false;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
+			$scope.listaSessoes = [];
+			$scope.tempos = [];
+		}
+		if(nav.comp == 'loja'){
+			$scope.navLojas.splice(1,$scope.navLojas.length);
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = true;
+			$scope.mostraPosicoes = false;
+			$scope.mostraData = false;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
+			$scope.listaSessoes = [];
+		}
+		if(nav.comp == 'posicao'){
+			$scope.navLojas.splice(2,$scope.navLojas.length);
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = true;
+			$scope.mostraData = false;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
+			$scope.listaSessoes = [];
+		}
+		if(nav.comp == 'data'){
+			$scope.navLojas.splice(3,$scope.navLojas.length);
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = false;
+			$scope.mostraData = true;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
+			$scope.listaSessoes = [];
+		}
+		if(nav.comp == 'tempo'){
+			$scope.navLojas.splice(4,$scope.navLojas.length);
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = false;
+			$scope.mostraData = false;
+			$scope.mostraTempo = true;
+			$scope.mostraSessoes = false;
+			$scope.listaSessoes = [];
+		}
+		if(nav.comp == 'hora'){
+			$scope.navLojas.splice(5,$scope.navLojas.length);
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = false;
+			$scope.mostraData = false;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = true;
+		}
+
 	};
 
 	$scope.selecionaCidade = function(cidade) {
@@ -44,7 +107,7 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
 
 		if(cidade != null){
 			$scope.navLojas = [
-				{nome: cidade.nome}
+				{nome: cidade.nome, comp: 'cidade'}
 			];
 			$scope.mostraCidades = false;
 			$scope.mostraLojas = true;
@@ -65,11 +128,13 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
 			if($scope.navLojas.length > 1){
 				$scope.navLojas.splice(1,1);
 			}
-			$scope.navLojas.push({nome: loja.nome});
+			$scope.navLojas.push({nome: loja.nome, comp: 'loja'});
 			$scope.mostraCidades = false;
 			$scope.mostraLojas = false;
-			$scope.mostraData = true;
-			$scope.mostraPosicoes = false;
+			$scope.mostraPosicoes = true;
+			$scope.mostraData = false;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
 		} else {
 			$scope.navLojas = [{nome: ''}];
 		}
@@ -83,58 +148,100 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
 		console.log(posicao);
 
 		if(posicao != null){
-			if($scope.navLojas.length > 3){
+			if($scope.navLojas.length > 2){
 				$scope.navLojas.splice(1,1);
 			}
-			$scope.navLojas.push({nome: posicao.nome});
+			$scope.navLojas.push({nome: posicao.nome, comp: 'posicao'});
 			$scope.mostraCidades = false;
 			$scope.mostraLojas = false;
 			$scope.mostraPosicoes = false;
+			$scope.mostraData = true;
+			$scope.mostraTempo = false;
+			$scope.mostraSessoes = false;
 		} else {
 			$scope.navLojas = [{nome: ''}];
 		}
 		
 	};
 
-	$scope.reservar = function() {
-		
-		console.log('Cidade ' + $scope.cidade.nome);
-		console.log('Loja ' + $scope.loja.nome);
-		console.log('Posicao ' + $scope.posicao.nome);
-		console.log('ID ' + $scope.posicao.codigo);
-	};
-
 	$scope.selecionaData = function() {
 		if(data == null){
-			alert('Selcione uma data!');
+			alert('Selecione uma data!');
 		} else {
-			if($scope.navLojas.length > 2){
+			if($scope.navLojas.length > 3){
 				$scope.navLojas.splice(1,1);
 			}
-			$scope.navLojas.push({nome: data.toString()});
+			$scope.navLojas.push({nome: data.getDate()+'/'+ (data.getMonth()+1) +'/'+ (data.getYear()+1900), comp: 'data'});
+			$scope.mostraCidades = false;
+			$scope.mostraLojas = false;
+			$scope.mostraPosicoes = false;
 			$scope.mostraData = false;
-			$scope.mostraPosicoes = true;
+			$scope.mostraTempo = true;
+			$scope.mostraSessoes = false;
 
-			$http.get('/listaSessoes/:dia=' + data).success(function(listaSessoes){
-				$scope.listaSessoes = listaSessoes[0].sessoes;
-				console.log(listaSessoes);
+			$http.get('/listaTempos').success(function(listaTempos){
+				$scope.tempos = listaTempos;
+				console.log(listaTempos);
 			}).error(function(erro){
 				console.log(erro);
-			});
-			
-			
-			/* //listar horas
-			$http.get('listaCidades').success(function(cidades){
-				$scope.cidades = cidades;
-				console.log(cidades);
-			}).error(function(erro){
-				console.log(erro);
-			});
-			*/
+			});	
 		}
-		
-		console.log(data);
 	};
+
+	$scope.selecionaTempo = function(tempo) {
+
+		$scope.tempo = tempo;
+		
+		if($scope.navLojas.length > 4){
+			$scope.navLojas.splice(1,1);
+		}
+		$scope.navLojas.push({nome: tempo.nome, comp: 'tempo'});
+		$scope.mostraCidades = false;
+		$scope.mostraLojas = false;
+		$scope.mostraPosicoes = false;
+		$scope.mostraData = false;
+		$scope.mostraTempo = false;
+		$scope.mostraSessoes = true;
+
+		//passar tempo.qtd
+		$http.get('/listaSessoes/:dia=' + data).success(function(listaSessoes){
+			$scope.listaSessoes = listaSessoes[0].sessoes;
+			console.log(listaSessoes);
+		}).error(function(erro){
+			console.log(erro);
+		});
+	};
+
+	$scope.selecionaHora = function(hora) {
+
+		$scope.hora = hora;
+
+		if($scope.navLojas.length > 5){
+			$scope.navLojas.splice(1,1);
+		}
+		$scope.navLojas.push({nome: hora, comp: 'hora'});
+
+		$scope.mostraCidades = false;
+		$scope.mostraLojas = false;
+		$scope.mostraPosicoes = false;
+		$scope.mostraData = false;
+		$scope.mostraTempo = false;
+		$scope.mostraSessoes = false;
+		
+		console.log(hora);
+	};
+
+	$scope.reservar = function() {
+		
+		alert('Cidade: ' + $scope.cidade.nome 
+			+ ' Loja: ' + $scope.loja.nome 
+			+ ' espaço: ' + $scope.posicao.nome 
+			+ ' Data: ' + data 
+			+ ' por: ' + $scope.tempo.nome 
+			+ ' a partir das: ' + $scope.hora );
+		
+	};
+
 
 
 	//https://tarruda.github.io/bootstrap-datetimepicker/
@@ -143,13 +250,11 @@ angular.module('hall').controller('SalasController', function($scope, $http, $ro
     	format: 'dd/MM/yyyy',
         language: 'pt-BR',
         pickSeconds: false,
-        pickTime: false
+        pickTime: false,
+        startDate: new Date(),
+        endDate: null
     }).on('changeDate', function(e) {
     	data = e.localDate;
-		console.log(e.date.toString());
-		console.log(e.localDate.toString());
-    	console.log(data);
-  		
 	});
 
 });

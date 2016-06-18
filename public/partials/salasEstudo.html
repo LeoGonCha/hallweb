@@ -6,35 +6,10 @@
 <div class="jumbotron">
 	<p>Aqui você pode pesquisar as salas que temos disponíveis em sua região. </p>
   
-	<ol class="breadcrumb alert-info" ng-click="limpaLojasPosicoes()">
-		<li ng-repeat="nav in navLojas">{{nav.nome}}</li>
+	<ol class="breadcrumb alert-info">
+		<li ng-repeat="nav in navLojas" ng-click="limpaPosicoes(nav)">{{nav.nome}}</li>
 	</ol>
   
-
-  <div class="times">
-    <div class="time options-tbl mobile-toggler-parent ng-scope" ng-repeat="s in listaSessoes">
-      <header class="left-align mobile-toggler">
-        <h2>{{s.sessao}}</h2>
-        <table>
-          <tbody>
-            <tr  ng-repeat="hi in s.horariosI">
-              <td>
-                 {{hi.hora}}
-              </td>
-              <td>
-                  {{s.horariosM[$index].hora}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </header>
-    </div>
-  </div>
-
- 
-
-
-
 	<div class="btn-group" ng-show="mostraCidades">
 		<button id="btnCidade" type="button" class="btn-primary btn-lg dropdown-toggle"
   		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,20 +34,20 @@
   		</ul>
 	</div>
 
-   <div class="col-lg-6" ng-show="mostraData">
-      <div id="datetimepicker" class="input-group input-group-lg"> 
-        <span class="input-group-addon add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-        </span>
-        <input id="txtdia" type="text" placeholder="Data" class="form-control"></input>
-        <span class="input-group-btn">
-        <button type="button" class="btn-primary btn-lg" id="btndia" 
-          ng-click="selecionaData()">
-               Neste Dia!
-        </button>
-        </span>
-      </div>
+ <div class="col-lg-6" ng-show="mostraData">
+    <div id="datetimepicker" class="input-group input-group-lg"> 
+      <span class="input-group-addon add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+      <input id="txtdia" type="text" placeholder="Data" class="form-control"></input>
+      <span class="input-group-btn">
+      <button type="button" class="btn-primary btn-lg" id="btndia" 
+        ng-click="selecionaData()">
+             Neste Dia!
+      </button>
+      </span>
     </div>
+  </div>
  
 	<div id="divposicoes" ng-show="mostraPosicoes">
   		<ul class="list-group">
@@ -84,9 +59,59 @@
 		</ul>
 	</div>
 
+  <div class="btn-group" ng-show="mostraTempo">
+      <button id="btnTempo" type="button" class="btn-primary btn-lg dropdown-toggle"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+             Selecione uma duração
+          <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="tempo in tempos" ng-click="selecionaTempo(tempo)"><h4>{{tempo.nome}}</h4></li>
+      </ul>
+  </div>
+
+  <div class="times" ng-show="mostraSessoes">
+    <div class="time options-tbl mobile-toggler-parent ng-scope" ng-repeat="s in listaSessoes">
+      <header class="left-align mobile-toggler">
+        <h2>{{s.sessao}}</h2>
+        <table>
+          <tbody>
+            <tr  ng-repeat="hi in s.horariosI">
+              <td>
+                 <button ng-if="hi.disponivel" type="button" class="btn-primary" 
+                  ng-click="selecionaHora(hi.hora)" 
+                  ng-disabled="!hi.disponivel">
+                    {{hi.hora}}
+                 </button>
+                 <button ng-if="!hi.disponivel" type="button" class="btn-default" 
+                  ng-click="selecionaHora(hi.hora)" 
+                  ng-disabled="!hi.disponivel">
+                    {{hi.hora}}
+                 </button>
+              </td>
+              <td>
+                <button ng-if="s.horariosM[$index].disponivel" type="button" class="btn-primary" 
+                  ng-click="selecionaHora(s.horariosM[$index].hora)" 
+                  ng-disabled="!s.horariosM[$index].disponivel">
+                  {{s.horariosM[$index].hora}}
+                </button>
+                <button ng-if="!s.horariosM[$index].disponivel" type="button" class="btn-default" 
+                  ng-click="selecionaHora(s.horariosM[$index].hora)" 
+                  ng-disabled="!s.horariosM[$index].disponivel">
+                  {{s.horariosM[$index].hora}}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
+    </div>
+  </div>
+
   </p>
-  	<button type="button" class="btn btn-primary btn-lg" ng-show="!mostraPosicoes && !mostraData && !mostraLojas && !mostraCidades" ng-click="reservar()">
-  		<h4>Reservar</h4>
+  	<button type="button" class="btn btn-primary btn-lg" ng-show="!mostraSessoes && !mostraTempo && !mostraPosicoes && !mostraData && !mostraLojas && !mostraCidades" ng-click="reservar()">
+  		<h3> Reservar </h3>
   	</button>
 	</p>
 
