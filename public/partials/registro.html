@@ -1,0 +1,50 @@
+<div class="page-header text-center">
+    <h1>Cadastro Novo Usuario</h1>
+</div>
+
+
+<div class="jumbotron">
+	
+	<div id="idCadastro">
+
+		<p ng-show="mensagem.length" class="alert alert-info">{{mensagem | uppercase}}</p>
+
+  		<form class="row" ng-submit="cadastrar()" name="formcadastro">
+			<div class="form-group"> 
+				<label for="name" class="ng-scope">Nome</label> 
+				<input class="form-control ng-pristine ng-valid ng-touched" id="name" placeholder="Seu e-mail" 
+					ng-model="nome" tabindex="0" aria-invalid="false" required>
+			</div>
+			<div class="form-group"> 
+				<label for="cpf" class="ng-scope">CPF</label> 
+				<input class="form-control ng-pristine ng-valid ng-touched" id="cpf" placeholder="Seu e-mail" 
+					ng-model="cpf" tabindex="1" aria-invalid="false" required>
+			</div>
+			<div class="form-group"> 
+				<label for="tel" class="ng-scope">Telefone</label> 
+				<input class="form-control ng-pristine ng-valid ng-touched" id="tel" placeholder="Seu e-mail" 
+					ng-model="tel" tabindex="2" aria-invalid="false" required>
+			</div>
+			<div class="form-group"> 
+				<label for="username" class="ng-scope">E-mail</label> 
+				<input class="form-control ng-pristine ng-valid ng-touched" id="username" placeholder="Seu e-mail" 
+					ng-model="usuario" tabindex="3" aria-invalid="false" required>
+			</div>
+
+			<div class="form-group"> 
+				<label for="password" class="ng-scope">Senha</label>
+				<input type="password" class="form-control ng-pristine ng-valid ng-touched" id="password" 
+					placeholder="Sua senha" ng-model="senha" tabindex="4" aria-invalid="false" required> 
+			</div>
+			<div class="form-group"> 
+				<label for="passwordconf" class="ng-scope">Digite sua Senha novamente</label>
+				<input type="password" class="form-control ng-pristine ng-valid ng-touched" id="passwordconf" 
+					placeholder="Sua senha" ng-model="senhaconf" tabindex="5" aria-invalid="false" required> 
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-lg" translate="login.form.button">Cadastrar</button>
+			</div>
+		</form>
+	</div>
+  
+</div>  

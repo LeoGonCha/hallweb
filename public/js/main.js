@@ -29,6 +29,15 @@ angular.module('hall', ['minhasDiretivas','ngAnimate','ngRoute'])
 			controller: 'ReservasController'
 		});
 
+		$routeProvider.when('/login', {
+			templateUrl: 'partials/autenticacao.html',
+			controller: 'AutenticacaoController'
+		});
+
+		$routeProvider.when('/registro', {
+			templateUrl: 'partials/registro.html',
+			controller: 'AutenticacaoController'
+		});
 
 		$routeProvider.when('/homepage', {
 			redirectTo: function() {

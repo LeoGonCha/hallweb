@@ -1,4 +1,4 @@
-angular.module('hall').controller('HorasController', function($scope, $http){
+angular.module('hall').controller('HorasController', function($scope, $http, $location){
 
 	$scope.pacotes = [];
 
@@ -13,6 +13,7 @@ angular.module('hall').controller('HorasController', function($scope, $http){
 
 		console.log(pacote);
 
+		$location.path("/login");
 	};
 
 	
