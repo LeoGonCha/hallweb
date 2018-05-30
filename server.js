@@ -13,6 +13,7 @@ http.createServer(app).listen(server_port, server_ip_address, function() {
 
 var mysql = require('mysql');
 
+/*
 var con = mysql.createConnection({
   host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
   user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
@@ -26,3 +27,4 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });
+*/
