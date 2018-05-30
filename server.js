@@ -14,7 +14,7 @@ http.createServer(app).listen(server_port, server_ip_address, function() {
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
+  host     : 'mysql://mysql:3306/',
   user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
   password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
   port     : process.env.OPENSHIFT_MYSQL_DB_PORT,
